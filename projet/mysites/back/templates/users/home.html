@@ -1,0 +1,89 @@
+{% extends 'base.html'%}
+
+{% block 'css' %}
+{% endblock %}
+{% block title %}
+    home
+{% endblock %}
+{%block 'content' %}
+{% include "users/navuser.html" %}
+
+<h1>{{ user.last_name }} {{ user.first_name }}</h1>
+
+<div>
+    <h1>Epreuves</h1>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Niveau</th>
+                <th>Annee</th>
+                <th>Matiere</th>
+                <th>Filliere</th>
+                <th>Professeur</th>
+                <th>Ajouté par</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for ep in epreuves %}
+            <tr>
+                <td>{{ep.nom_epreuve}}</td>
+                <td>{{ep.niveau_epreuve}}</td>
+                <td>{{ep.annee_epreuve}}</td>
+                <td>{{ep.matiere_epreuve}}</td>
+                <td>{{ep.nom_filliere}}</td>
+                <td>{{ep.nom_prof}}</td>
+                <td>{{ep.username}}</td>
+                <td>
+                    <a href="/accounts/profile/epreuve/{{ep.id_epreuve}}"><button class="btn btn-primary">Voir Epreuve</button></a>
+                    <a href="/accounts/profile/correction/{{ep.id_epreuve}}"><button class="btn btn-primary">Voir Correction</button></a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+      </table>
+    </div>
+</div>
+
+<div>
+    <h1>MES EPREUVES</h1>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for ep in mesepreuves %}
+            <tr>
+                <td>{{ep.nom_epreuve}}</td>
+                <td>
+                    <td><a href="/accounts/profile/epreuve/{{ep.id_epreuve}}"><button class="btn btn-primary">Voir Epreuve</button></a></td>
+                    <td><a href="/accounts/profile/correction/{{ep.id_epreuve}}"><button class="btn btn-primary">Voir Correction</button></a></td>
+                    <td><a href="/accounts/profile/delete/{{ep.id_epreuve}}"><button class="btn btn-danger">Delete</button></a></td>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+      </table>
+    </div>
+</div>
+
+<div>
+    <h1>AJOUTER EPREUVE</h1>
+
+    <form action="" method="POST" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+</div>
+
+{% endblock %}
+{% block 'js'%}
+ 
+{% endblock%}

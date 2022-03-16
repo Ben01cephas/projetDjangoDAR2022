@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+
+{% block 'css' %}
+{% endblock %}
+{% block title %}
+    home
+{% endblock %}
+{%block 'content' %}
+{% include "users/navuser.html" %}
+<div class="container">
+    <div class="row justify-content-center align">
+        <div class="col-md-6">
+            {% load crispy_forms_tags %}
+            <form class="form-horizontal" method="post" action="" novalidate>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block 'js'%}
+ 
+{% endblock%}
