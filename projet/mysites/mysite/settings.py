@@ -7,7 +7,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
+
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecureueh7-tj*27pt!j#ywdih232ao$#*hxysafwts8b$xrr%@yo08a'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,9 +87,9 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'back_db',#base de donnee
-        'USER': 'root',
-        'PASSWORD': '',
+        'NAME': 'back_db',  # base de donnee
+        'USER': 'user_library',
+        'PASSWORD': 'pass',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
@@ -132,16 +137,13 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#user
+# user
 AUTH_USER_MODEL = 'back.User'
 
 LOGIN_REDIRECT_URL = '/accounts/profile'
 LOGIN_URL = '/'
-# TEMPLATE_DIRS = (
-#     BASE_DIR + '/templates/',
-# )
 
-# Emvoyer l'email en local sur la console
+# Envoyer l'email en local sur la console
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
